@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header"/>
+
+<body>
+<div th:replace="common/header :: navbar"/>
+
+<div class="container">
+    <div class="row">
+        <form class="form-horizontal" th:action="@{/order/createCouponAdmin}" th:object="${promotionalCoupon}"
+              method="post">
+            <fieldset>
+                <legend class="center-block">
+                    Criacao do Cupom Promocional pelo Administrador<span style="font-size: small"> * estes campos sao obrigatorios</span>
+                </legend>
+
+                <!-- valido_de -->
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="startDate">*Data Inicial</label>
+
+                    <div class="col-md-6">
+                        <input type="date" th:field="${pCoupon.startDate}"
+                               class="form-control" id="startDate"
+                               required="required" placeholder="Inicio da Validade"/>
+                        <span class="help-block">Inicio da Validade</span>
+                    </div>
+                </div>
+
+                <!-- valido_ate -->
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="endDate">*Data de Validade</label>
+                    <div class="col-md-6">
+                        <input type="date" th:field="${pCoupon.endDate}"
+                               class="form-control" id="endDate"
+                               required="required" placeholder="Data de Validade"/>
+                        <span class="help-block">Data de Validade</span>
+                    </div>
+                </div>
+                <!-- valor -->
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="value">*Valor</label>
+                    <div class="col-md-6">
+                        <input type="number" name="value" class="form-control"
+                               th:field="${pCoupon.value}" step="0.01"
+                               placeholder="valor"/> <span class="help-block">Valor do Cupom</span>
+                    </div>
+                </div>
+
+                <!-- codigo -->
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="code">Codigo</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" id="code"
+                               th:field="${pCoupon.code}"
+                               placeholder="Codigo do Cupom"/> <span class="help-block">Codigo do Cupom</span>
+                    </div>
+                </div>
+
+                <!-- status do cupom -->
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="status">Status</label>
+                    <div class="col-md-6">
+                        <label><input value="true" type="radio" name="active"
+                                      checked="checked"/> Ativo </label> <label><input
+                            value="false" type="radio" name="active"/>
+                        Inativo </label> <span class="help-block">Indica se este Cupom e Ativo ou Inativo</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-success">Adicionar Cupom</button>
+                        <a class="btn btn-danger" th:href="@{/}">Cancelar</a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+
+<div th:replace="common/header :: body-bottom-scripts"/>
+</body>
+</html>

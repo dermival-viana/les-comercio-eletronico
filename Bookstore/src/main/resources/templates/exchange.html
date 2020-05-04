@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header">
+<!-- Bootstrap core CSS -->
+<link href="/css/bootstrap.min.css" rel="stylesheet" />
+
+<link href="/css/non-responsive.css" rel="stylesheet" />
+
+<link href="/css/font-awesome.min.css" rel="stylesheet" />
+
+<!-- Custom styles for this template -->
+<link href="/css/style.css" rel="stylesheet" />
+<style>
+table {
+	border-collapse: collapse;
+}
+
+table, th, td {
+	border: 1px solid black;
+}
+
+.mesmo-tamanho {
+	width: 35%;
+	white-space: normal;
+}
+</style>
+</head>
+
+<body>
+	<div th:replace="common/header :: navbar" />
+
+	<p>
+		Dear <span th:text="${user.firstName}"></span>,
+	</p>
+	<br />
+	<p>Obrigado por fazer compras em nossa livraria. Esperamos que você tenha um
+gostado do nosso serviço!</p>
+	<p>
+		Seu numero do pedido e: <strong>#<span th:text="${order.id}"></span></strong>.
+		Aqui esta os detalhes do pedido:
+	</p>
+	<h3>
+		<strong>Detalhes do pedido de compras  </strong>&nbsp;#<span th:text="${order.id}"></span>
+	</h3>
+	<hr />
+
+	<div class="table-responsive">
+		<table class="table table-bordered table-hover table-striped">
+		<tr>
+			<th>Detalhes da Cobranca</th>
+			<th>Informacoes de Pagamento</th>
+			<th>Endereco de envio</th>
+		</tr>
+		<tr>
+			<td><span th:text="${order.billingAddress.billingAddressName}"></span><br />
+				<span
+				th:text="${order.billingAddress.billingAddressStreet1}+' '+${order.billingAddress.billingAddressStreet2}"></span><br />
+				<span th:text="${order.billingAddress.billingAddressNumber}"></span><br />
+				<span th:text="${order.billingAddress.billingAddressCity}"></span><br />
+				<span th:text="${order.billingAddress.billingAddressState}"></span><br />
+				<span th:text="${order.billingAddress.billingAddressCountry}"></span><br />
+				<span th:text="${order.billingAddress.billingAddressZipcode}"></span><br />
+			</td>
+			<td><span th:text="${order.payment.holderName}"></span><br /> <span
+				th:text="${order.payment.type}"></span><br /> <span
+				th:text="${order.payment.cardNumber}"></span><br /> <span
+				th:text="${order.payment.expiryMonth}"></span><br /> <span
+				th:text="${order.payment.expiryYear}"></span><br /></td>
+			<td><span th:text="${order.shippingAddress.shippingAddressName}"></span><br />
+				<span
+				th:text="${order.shippingAddress.shippingAddressStreet1}+' '+${order.shippingAddress.shippingAddressStreet2}"></span><br />
+				<span th:text="${order.shippingAddress.shippingAddressNumber}"></span><br />
+				<span th:text="${order.shippingAddress.shippingAddressCity}"></span><br />
+				<span th:text="${order.shippingAddress.shippingAddressState}"></span>
+				<span th:text="${order.shippingAddress.shippingAddressCountry}"></span>
+				<span th:text="${order.shippingAddress.shippingAddressZipcode}"></span><br />
+			</td>
+		</tr>
+	</table>
+</div>
+	<h3>
+		<strong>Resumo da Troca</strong>
+	</h3>
+	<div class="table-responsive">
+		<table class="table table-bordered table-hover table-striped">
+			<thead>
+				<tr>
+					<td><strong>Item </strong></td>
+					<td class="text-center"><strong>N.Pedido</strong></td>
+					<td class="text-center"><strong>Preco do Item</strong></td>
+					<td class="text-center"><strong>Valor dos Itens Trocados</strong></td>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="cartItem : ${cartItems}">
+					<td><span data-th-text="${cartItem.book.title}"></span></td>
+					<td class="text-center" data-th-text="${exchange.order.id}"></td>
+					<td class="text-center" data-th-text="${cartItem.book.ourPrice}"></td>
+					<td class="text-center" data-th-text="${cartItem.qty}"></td>
+					<td class="text-center" data-th-text="${cartItem.subtotal}"></td>
+				</tr>
+				
+				<tr>
+					<td class="emptyrow"></td>
+					<td class="emptyrow"></td>
+                    <td class="emptyrow"></td>
+				</tr>
+				<tr>
+					<td class="emptyrow"><i class="fa fa-barcode iconbig"></i></td>
+					<td class="emptyrow"></td>
+					<td class="emptyrow text-center"><strong>Total da Troca =</strong></td>
+					<td th:with="total=${exchange.valueExchange}"
+						data-th-text="${#numbers.formatDecimal(total, 0, 2)}"
+						class="emptyrow text-right"></td>
+				</tr>
+			</tbody>
+		</table>
+  </div>
+
+		<!-- end of container -->
+		<div th:replace="common/header :: footer" />
+
+		<div th:replace="common/header :: body-bottom-scripts" />
+</body>
+</html>

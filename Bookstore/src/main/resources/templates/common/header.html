@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:fragment="common-header">
+<meta charset="utf-8" />
+<meta http-equiv="Content-Language"  content="IE=edge,pt-br" />
+
+<title>E-Book Livraria Eletrônica</title>
+
+<!-- Bootstrap core CSS -->
+<link href="/css/bootstrap.min.css" rel="stylesheet" />
+
+<link href="/css/non-responsive.css" rel="stylesheet" />
+
+<!-- data table -->
+<link th:href="@{/css/jquery.dataTables.min.css}" rel="stylesheet" />
+<link th:href="@{/css/dataTables.bootstrap.min.css}" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+
+<link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" />
+
+<!-- Custom styles for this template -->
+<link href="/css/style.css" rel="stylesheet" />
+
+<link rel="icon" href="/image/applie-touch-icon.png" />
+</head>
+
+<body>
+	<div th:fragment="navbar">
+		<div class="page-top"
+			style="width: 100%; height: 20px;"></div>
+		<!-- Static navbar -->
+		<nav class="navbar navbar-default navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" style="color:#8B0000;" th:href="@{/}">E Book</a>
+				</div>
+				<div id="navbar">
+					<ul class="nav navbar-nav navbar-left">
+						<li class="dropdown"><a th:href="@{/bookshelf}"
+							class="dropdown-toggle" data-toggle="dropdown" role="button"
+							aria-haspopup="true" aria-expanded="false">Livros <span
+								class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a th:href="@{/bookshelf}">Navegue pela nossa Estante</a></li>
+								<li><a th:href="@{/hours}">Funcionamento &#38; Direção</a></li>
+								<li><a th:href="@{/faq}">FAQ</a></li>
+
+							</ul></li>
+						<form class="navbar-form" th:action="@{/searchBook}" method="post">
+							<div class="form-group">
+								<input type="text" name="keyword" class="form-control"
+									placeholder="Título do Livro" />
+							</div>
+							<button type="submit" class="btn btn-default">Pesquisar</button>
+						</form>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a th:href="@{/shoppingCart/cart}">Carrinho de Compra</a></li>
+						<li><a sec:authorize="isAnonymous()" th:href="@{/login}">Minha Conta</a></li>
+						<li><a sec:authorize="isAuthenticated()"
+							th:href="@{/myProfile}">Minha Conta</a></li>
+						<li><a sec:authorize="isAuthenticated()" th:href="@{/logout}">Sair</a></li>
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+			<!--/.container-fluid -->
+		</nav>
+	</div>
+
+	<div th:fragment="footer">
+		<br />
+		<br />
+		<footer>
+			<div class="row">
+				<div class="col-xs-3 footerleft">
+					<div class="logofooter">
+						<a th:href="@{/}"><img class="img-responsive"
+							src="/image/Logo_bookstore2.png" style="width: 200px;" /></a>
+					</div>
+					<p>
+						E Book sua Livraria Eletrônica. <br />Vendendo o que há de melhor.</p>
+				</div>
+				<div class="col-xs-3 paddingtop-bottom">
+					<h6 class="heading7">Contato</h6>
+					<ul class="post">
+						<p>
+							<i class="fa fa-map-pin"></i> Rua Rui Barbosa, 121 - Vila Costa<br />Suzano  - SP, Brasil
+							
+						</p>
+						<p>
+							<i class="fa fa-phone"></i> Telefone : 11 9 7300-2214
+						</p>
+						<p>
+							<i class="fa fa-envelope"></i> E-mail : dermival.viana@gmail.com
+						</p>
+					</ul>
+				</div>
+				<div class="col-xs-3 paddingtop-bottom">
+					<h6 class="heading7">LINKS</h6>
+					<ul class="footer-ul">
+						<li><a href="#"> Política de Privacidade</a></li>
+						<li><a href="#"> Termos &#38; Condições</a></li>
+						<li><a href="#"> FAQ</a></li>
+					</ul>
+				</div>
+				<div class="col-xs-3 paddingtop-bottom">
+					<h6 class="heading7">Horário de Funcionamento</h6>
+					<div class="post">
+						<p>Segunda - Sábado: 08:00 - 23:00</p>
+						<p>Domingo: 9:00 - 22:00</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<div class="copyright">
+			<div class="col-md-6">
+				<p>© 2020 - Dermival Corrêa Viana all rights reserved</p>
+			</div>
+			<div class="col-md-6">
+				<ul class="bottom_ul">
+					<li><a href="#">Sobre</a></li>
+					<li><a href="#">Blog</a></li>
+					<li><a href="#">FAQ</a></li>
+					<li><a href="#">Contato </a></li>
+					<li><a href="#">Mapa do Site</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div th:fragment="body-bottom-scripts">
+		<script th:src="@{/js/jquery.min.js}"></script>
+		<script th:src="@{/js/bootstrap.min.js}"></script>
+
+		<script th:src="@{/js/scripts.js}"></script>
+
+		<!-- data table -->
+		<script th:src="@{/js/jquery.dataTables.min.js}"></script>
+		<script th:src="@{/js/dataTables.bootstrap.min.js}"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+	</div>
+</body>
+</html>

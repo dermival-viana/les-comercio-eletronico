@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header" />
+
+<body>
+	<div th:replace="common/header :: navbar" />
+
+	<div class="container">
+		<form class="form-horizontal" th:action="@{/order/aprovedExchange}"
+			method="post">
+
+			<div class="table-responsive">
+				<table id="exchangeListTable"
+					class="table table-bordered table-hover table-striped">
+					<thead>
+						<tr>
+							<th><input th:id="selectAllExchanges" type="checkbox" /></th>
+							<th>Pedido</th>
+							<th>Data</th>
+							<th>Status</th>
+							<th>Valor</th>
+							<th>Justificativa</th>
+                            <th>Cliente</th>
+							<th>Operacao</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr data-th-each="exchange : ${exchangeList}">
+							<td>
+								<input
+									th:id="idExchange"
+									th:name="idExchange"
+									class="checkboxBook"
+									th:value="${exchange.id}"
+									type="checkbox"
+								/>
+							</td>
+
+							<td th:text="${exchange.order.id}"></td>
+							<td th:text="${exchange.exchangeDate}"></td>
+							<td th:text="${exchange.statusExchange}"></td>
+							<td th:text="${exchange.valueExchange}"></td>
+							<td th:text="${exchange.justification}"></td>
+							<td th:text="${exchange.user.id}"></td>
+							<td><input hidden="hidden" name="id"
+								th:value="${exchange.id}" />
+								<button th:id="'oneBook-'+${exchange.id}"
+									class="btn btn-danger btn-xs delete-exchange" type="submit"
+									value="delete">
+									<span class="fa fa-times"></span>Apagar
+								</button></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div class="mb-3">
+					<label>* Selecione o Status</label>
+					<div class="row">
+						<div class="col-xs-3">
+							<select class="form-control" name="statusExchange"
+								required="required" th:value="${statusExchange}">
+								<option data-th-each=" statusExchange: ${statusExchange}"
+									th:text="${statusExchange.description}" th:value="${statusExchange.code}">
+
+								</option>
+
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br />
+			<br />
+			<div>
+				<button type="submit" class="btn btn-primary">Enviar</button>
+			</div>
+		</form>
+	</div>
+
+
+	<div th:replace="common/header :: body-bottom-scripts" />
+
+	<script>
+		$(document).ready(
+				function() {
+					$("#exchangeListTable").DataTable(
+							{
+								"lengthMenu" : [ [ 5, 10, 15, 20, -1 ],
+										[ 5, 10, 15, 20, "All" ] ],
+								"ordering" : false,
+								stateSave : true
+							});
+				});
+	</script>
+</body>
+</html>

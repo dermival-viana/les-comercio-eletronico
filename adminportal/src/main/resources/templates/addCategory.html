@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header" />
+
+<body>
+	<div th:replace="common/header :: navbar" />
+
+	<div class="container">
+		<div class="row">
+			<form class="form-horizontal" th:action="@{/category/add}" method="post"
+				enctype="multipart/form-data">
+				<fieldset>
+					<legend class="center-block">
+						Informacoes de Novas Categorias<span style="font-size: small"> * estes campos sao obrigatorios</span>
+                        <br/>
+                        <div align="center">
+                            <div align="center" style="color:red;size: A3;font-style:italic;"  th:if="${Msg != null}">
+                                <span th:text="${Msg}">!...</span>
+                            </div>
+
+                        </div>
+
+					</legend>
+
+					<!-- nome -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="name">* Nome</label>
+
+						<div class="col-md-8">
+							<input type="text" name="name" class="form-control" id="name"
+								th:value="${category.name}"  placeholder="Nome da Categoria" />
+							<span class="help-block">Nome da Categoria</span>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-md-2"></div>
+						<div class="col-md-8">
+							<button type="submit" class="btn btn-success">Adicionar Categoria</button>
+							<a class="btn btn-danger" th:href="@{/}">Cancelar</a>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+
+	<div th:replace="common/header :: body-bottom-scripts" />
+</body>
+</html>

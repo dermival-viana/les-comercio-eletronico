@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header" />
+
+<body>
+	<div th:replace="common/header :: navbar" />
+
+	<div class="container">
+		<div class="row" style="margin-bottom: -100px;">
+			<div class="col-xs-8">
+				<h2 class="section-headline">
+				 <h2><span>Conta do Usuario</span></h2>
+				 </h2>
+			</div>
+			<div class="col-xs-4">
+            <img src="/image/logo_ebook.png" class="img-responsive"/>
+         </div>
+		</div>
+		<hr
+			style="position: absolute; width: 100%; height: 6px; background-color: #333; z-index: -1; margin-top: -80px;" />
+		<img class="img-responsive" src="/image/wood.png"
+			style="margin-top: -75px;" />
+
+		<div class="row" style="margin-top:10px">
+			<div class="col-xs-9 col-xs-offset-3">
+				<h5>Pedido Invalido. O caminho requisitado e invalido. Clique <a th:href="@{/}">aqui</a> para retornar para a Home Page.</h5>
+			</div>
+		</div>
+	</div>
+	<!-- fim do container -->
+<div th:replace="common/header :: footer"/>
+
+	<div th:replace="common/header :: body-bottom-scripts" />
+</body>
+</html>

@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header" />
+
+<body>
+	<div th:replace="common/header :: navbar" />
+
+	<div class="container">
+		<form class="form-horizontal" th:action="@{/order/orderUpdate}" method="post">
+			
+			<div class="table-responsive">
+				<table id="bookListTable"
+					class="table table-bordered table-hover table-striped">
+					<thead>
+						<tr>
+							<th><input th:id="selectAllBooks" type="checkbox" /></th>
+							<th>Pedido</th>
+							<th>DataTable</th>
+							<th>Status</th>
+							<th>Usuario</th>
+							<th>Total</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr data-th-each="order : ${orderList}">
+							<td>
+								<input
+										th:id="idOrder"
+										th:name="idOrder"
+										class="checkboxBook"
+										th:value="${order.id}"
+										type="checkbox"
+								/>
+							</td>
+							<td th:text="${order.id}"></td>
+							<td th:text="${order.orderDate}"></td>
+							<td th:text="${order.statusOrder}"></td>
+							<td th:text="${order.user.firstName}"></td>
+							<td th:text="${order.orderTotal}"></td>
+
+                
+						</tr>
+					</tbody>
+										
+				</table>
+				<div class="mb-3">
+					<label>* Selecione o Status</label>
+					<div class="row">
+						<div class="col-xs-3">
+							<select class="form-control" name="statusOrder"
+									required="required" th:value="${statusOrder}">
+								<option data-th-each=" statusOrder: ${statusOrder}"
+										th:text="${statusOrder.description}" th:value="${statusOrder.code}">
+
+								</option>
+
+							</select>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<button type="submit" class="btn btn-primary mesmo-tamanho">Enviar</button>
+		</form>
+
+	</div>
+
+
+	<div th:replace="common/header :: body-bottom-scripts" />
+
+	<script>
+		$(document).ready(
+				function() {
+					$("#bookListTable").DataTable(
+							{
+								"lengthMenu" : [ [ 5, 10, 15, 20, -1 ],
+										[ 5, 10, 15, 20, "All" ] ],
+								"ordering" : false,
+								stateSave : true
+							});
+				});
+	</script>
+</body>
+</html>
